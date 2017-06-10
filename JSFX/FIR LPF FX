@@ -1,0 +1,17 @@
+desc:new effect
+
+import ../FIR LPF from 1 pole IIR
+
+slider1:500<20,20000,1>parameter1
+
+@init
+memMgrSetup(3,0);
+a.memAllocAtEnd(0);
+end.memAllocAtEnd(0);
+@slider
+a.FIRlpCutoff(slider1);
+
+@sample
+spl0=a.FIRlp(spl0);
+spl1=spl0;
+

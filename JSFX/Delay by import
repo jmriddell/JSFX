@@ -1,0 +1,32 @@
+desc:Delay Import
+
+//import ../Memory Manager
+import ../Delay n samples
+import ../fistOrderLPF
+
+slider1:0<0,44100,2>Delay (samples)
+
+@init
+  ext_noinit = 1.0;
+  memMgrSetup(2,0);
+  a.memAlloc(44101,1);
+  b.memAlloc(44101,2);
+  prin = _memIndexChk();
+  pfdsf = b.mStart();
+  c.lpfCoefSet(3);
+  d.lpfCoefSet(5);
+@slider
+  //a.delSpls=slider1; 
+  //b.delSpls=slider1;
+@sample
+  a.delSpls = c.lpf(d.lpf(slider1));
+  b.delSpls = a.delSpls; 
+  
+  test = (mem.objects*2)[1];
+  test2 = mem.used;
+  /*zastart = a.mStart();
+  zamem = a.mSize();
+  zbstart = b.mStart();
+  zbmem = b.mSize();*/
+  spl0=a.delDel(spl0);
+  spl1=b.delDel(spl1); 

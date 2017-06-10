@@ -1,0 +1,61 @@
+desc:1 pole filter
+
+slider1:0<0,10,0.001>Octave
+slider2:0<20,20480,1>Frequency
+
+//==========================================
+@init
+  hsr=srate/2;
+  
+  bpos=0;
+  
+  function range(mi,val,ma) (
+    max(mi,min(val,ma));
+  );
+  
+  function log2(x) (
+    log(x)/log(2);
+  );
+  
+  function exp2(x) (
+    2^x;
+  );
+  
+  log20=log2(20);
+
+//===========================================
+@slider
+  slider1=range(0,slider1,10);
+  
+  slider2=range(20,slider2,hsr);
+  
+  slider1 != prev1 ? (
+    slider2=exp2(slider1+log20);
+  );
+  
+  slider2 != prev2 ? (
+    slider1=log2(slider2)-log20;
+  );
+  
+  prev2=slider2;
+  
+  prev1=slider1;
+  
+  a0=slider1/10;
+  
+  b1=1-a0;
+
+//===========================================
+@block
+  blah+=samplesblock;
+
+//===========================================
+@sample
+  spl0=spl0*a0+pre0*b1;
+  
+  spl1=spl1*a0+pre1*b1;
+  
+  pre0=spl0;
+  
+  pre1=spl1;
+

@@ -1,0 +1,12 @@
+desc:new effect
+
+@init
+bpos=0;
+
+@slider
+
+
+@sample
+reg01=spl0;
+reg02=spl1;
+

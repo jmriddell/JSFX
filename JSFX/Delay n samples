@@ -1,0 +1,15 @@
+desc:Delay Uninterpolated
+
+import Circular Buffer
+
+@init
+
+function delDel(sample) instance(delSpls)
+(
+  this.cbPush(sample);
+  this.cbGet(delSpls);
+);
+
+
+
+

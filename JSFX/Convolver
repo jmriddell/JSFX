@@ -1,0 +1,23 @@
+desc:Convolver
+
+import ../Memory Manager
+import ../Circular Buffer
+
+@init
+  function convSetIR(mem2xOrd) instance(convIRAdr convIRSize)
+  (
+    convIRSize =  mem2xOrd[0];
+    convIRAdr = mem2xOrd[1];
+  );
+  
+  function convolve(sample) local(y i) instance(convIRAdr convIRSize)
+  (
+    this.cbPush(sample);
+    y = 0;
+    i = 0;
+    loop(convIRSize,
+      y += convIRAdr[i] * this.cbGet(i);
+      i += 1;
+    );
+    y;
+  );

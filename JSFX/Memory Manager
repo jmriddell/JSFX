@@ -1,0 +1,108 @@
+desc:Memory Manager
+
+//The first allocated object in ram is for the manager
+//itself, there are stored the size and the beginning
+//of every allocated object starting with the size
+//then the address where it starts, and the same for
+//the next objects.
+
+//functions beggining with "_" are intended to use without
+//a namespace like "something._func()" but alone like
+//"_func()"
+
+@init
+
+function memMgrSetup(basesize auxmem)
+(
+  mem.aux = auxmem;
+  basesize += 1;
+  basesize += basesize;
+  0[] = basesize;
+  1[] = 0;
+  mem.used = basesize-1;
+  mem.objects;
+);
+
+function memAlloc(size order)
+(
+  //this.memSize = size;
+  this.memOrder = order;
+  order += order;
+  this.mem2xOrder = order;
+  order[0] = size;
+  mem.used += 1;
+  order[1] = mem.used;
+  //this.memStart = mem.used;
+  mem.used += size;
+  mem.objects += 1;
+);
+
+function memAllocAtEnd(size)
+(
+  memAlloc(size, mem.objects +1);
+);
+  
+function _memIndexChk() local(sizeschk iterate acomsize)
+(
+  sizeschk = 1;
+  loop(mem.objects+1,
+    acomsize += iterate[];
+    //prevstart = iterate[];
+    sizeschk = sizeschk && (iterate[] == (iterate[3] - iterate[1]));
+    iterate += 2;
+  );
+  /*sizeschk&& */ //((acomsize - 1) == mem.used);
+  acomsize /*+ 1 == mem.used*/;
+);
+
+
+
+function mSize() instance(mem2xOrder)
+(
+  mem2xOrder[0];
+);
+
+function mStart() instance(mem2xOrder)
+(
+  mem2xOrder[1];
+);
+
+
+
+function _memMovRel(x2order,relnew)
+(
+  memcpy(x2order[1] + relnew, x2order[1], x2order[0]);
+  x2order[1] += relnew;
+);
+  
+function memGrow(newsize) instance(mem2xOrder memOrder) local(diff iterate)
+(
+  newsize > mSize() ?
+  (
+    diff = newsize - mSize();
+    iterate += mem.objects;
+    iterate += mem.objects;
+    loop(mem.objects - memOrder,
+      _memMovRel(iterate, diff);
+      iterate-=2;
+    );
+    mem2xOrder[0]=newsize;
+    mem.used += newsize;
+  );
+);
+
+
+
+function _memDelLast() local(adr)
+(
+  adr = mem.objects * 2;
+  freembuf(adr[1] + mem.aux);
+  adr[0] = 0;
+  adr[1] = 0;
+  mem.objects -= 1;
+);
+
+function _freeOver()
+(
+  freembuf(mem.used + mem.aux);
+);

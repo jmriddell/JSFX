@@ -1,0 +1,34 @@
+desc:ImpulseSampler
+
+/*
+Usage:
+------------------------
+ISStart(memStart);
+ISSample(func(1));
+while(ISnOver(),
+  ISSample(func(0));
+);
+------------------------
+*/
+
+@init
+function ISStart(mStart) (
+  IS.mstart = mStart;
+  IS.n = -1;
+  IS.sum = 0;
+  IS.nOver
+);
+
+function ISSample(sample) (
+  IS.n += 1;
+  (IS.mstart)[IS.n] = sample;
+);
+
+function ISnOver() (
+  IS.sum += abs((IS.mstart)[IS.n]);
+  IS.n >= 128 ? (
+    IS.sum -= abs((IS.mstart)[IS.n - 128]);
+    IS.nOver = (IS.sum <= 0.01);
+  );
+  IS.nOver;
+);

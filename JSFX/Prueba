@@ -1,0 +1,25 @@
+desc:Prueba asdf
+
+slider1:0<0,100,5>de a 5
+slider2:0<0,100,0.1>fino
+slider3:0<1,4,1{uno,dos,tres,cuatro}>alternativas
+
+@init
+gfx_clear=-1;
+
+@sample
+spl0=atan(spl0);
+spl1=atan(spl1);
+
+@gfx
+function setcol(r g b a)
+(
+  gfx_r=r; gfx_g=g; gfx_b=b; gfx_a=a;
+);
+function setpos(x y)
+(
+  gfx_x=x; gfx_y=y;
+);
+setcol(1,0.5,0.25,1);
+aa=1;
+  gfx_lineto(mouse_x,mouse_y,aa);

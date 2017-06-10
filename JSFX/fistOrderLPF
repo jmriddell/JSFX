@@ -1,0 +1,16 @@
+desc:new effect
+
+@init
+  e=exp(1);
+  pi=2*asin(1);
+  function lpf(sample) instance(a0 b1 y1)
+  (
+    y1=b1*sample+a0*y1;
+    y1;
+  );
+  
+  function lpfCoefSet(freq) instance(a0 b1)
+  (
+    a0 = e^(-2*pi*freq/srate);
+    b1 = 1-a0;
+  );

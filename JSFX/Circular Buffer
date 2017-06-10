@@ -1,0 +1,20 @@
+desc:Circular Buffer
+
+import ../Memory Manager
+
+@init
+function cbPush(value) instance(current)
+(
+  current += 1;
+  this.mStart()[current] = value;
+  current >= this.mSize() ? (current = 0;);
+);
+
+function cbGet(index)  instance(current)
+(
+  index = current - index;
+  index < 0 ? (index += this.mSize(););
+  this.mStart()[index];
+);
+
+

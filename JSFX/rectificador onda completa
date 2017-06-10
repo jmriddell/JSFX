@@ -1,0 +1,15 @@
+desc:new effect
+
+@init
+bpos=0;
+
+@slider
+something=slider1*srate;
+
+@block
+blah+=samplesblock;
+
+@sample
+spl0=abs(spl0);
+spl1=abs(spl1);
+

@@ -1,0 +1,27 @@
+desc:FIR LPF
+
+import ../fistOrderLPF
+import ../ImpulseSampler
+import ../Memory Manager
+import ../Convolver
+
+@init
+function FIRlpCutoff(freq ) (
+  _memDelLast();
+  _memDelLast();
+  this.lpfCoefSet(freq);
+  this.y1 = 0;
+  ISStart(mem.used + 1);
+  ISSample(this.lpf(1));
+  while(
+    ISSample(this.lpf(0));
+    ISnOver();
+  );
+  end.memAllocAtEnd(IS.n);
+  this.memAllocAtEnd(IS.n);
+  this.convSetIR(end.mem2xOrder);
+);
+
+function FIRlp(sample) (
+  this.convolve(sample);
+);
