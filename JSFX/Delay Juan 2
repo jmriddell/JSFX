@@ -1,0 +1,35 @@
+desc:Simple Delay
+
+slider1:0<-100,100,1>Delay
+in_pin:L
+in_pin:R
+out_pin:L
+out_pin:R
+
+@init
+function delay(smpl) instance(del index offset)
+(
+  offset[index]=smpl;
+  index+=1;
+  index >= (del) ? (index=0;);
+  offset[index];
+);
+function delayslider(delsli) instance(del index offset)
+(
+  del=delsli;
+  offset=offs;
+  offs+=(offset+delsli);
+  index=0;
+);
+pdc_bot_ch=0; pdc_top_ch=2;
+
+@slider
+offs=0;
+a.delayslider(slider1);
+b.delayslider(slider1);
+freembuf(offs);
+pdc_delay=-(min(0,slider1));
+
+@sample
+spl0=a.delay(spl0);
+spl1=b.delay(spl1);

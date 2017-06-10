@@ -1,0 +1,24 @@
+ desc:new effect
+
+slider1:0<1,1000,1>periodo
+
+@init
+bpos=0;
+senal=1;
+cuenta=0;
+
+@slider
+
+@block
+
+@sample
+cuenta+=1;
+cuenta >= slider1 ? 
+(
+cuenta=0;
+senal*=-1;
+);
+spl0=spl0+senal;
+spl1=spl1+senal;
+
+ 

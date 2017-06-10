@@ -1,0 +1,49 @@
+desc:Simple Delay
+
+slider1:0<-100,1000,1>Delay
+
+//==========================================
+@init
+  function delay(smpl) instance(rea wrt offset del) (
+    del != 0 ? (
+      offset[wrt]=smpl;
+      wrt+=1;
+      wrt == (del) ? (wrt=0;);
+      rea+=1;
+      rea == (del) ? (rea=0;);
+      offset[rea];
+    ):(
+      smpl;
+    );
+  );
+  
+  function delayslider(delsli) instance(offset del wrt rea) (
+    del=delsli;
+    offset=offs;
+    offs+=(offset+delsli);
+    wrt=0;
+    rea=0;
+  );
+  pdc_bot_ch=0;
+  pdc_top_ch=2;
+
+//==========================================
+@slider
+  slider1 > 0 ? (
+    offs=0;
+    a.delayslider(slider1);
+    b.delayslider(slider1);
+    freembuf(offs);
+    pdc_delay=0;
+  ):(
+    offs=0;
+    a.delayslider(0);
+    b.delayslider(0);
+    freembuf(0);
+    pdc_delay=abs(slider1);
+  );
+
+//==========================================
+@sample
+  spl0=a.delay(spl0);
+  spl1=b.delay(spl1);

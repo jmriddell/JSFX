@@ -1,0 +1,31 @@
+desc:updown filter
+
+slider1:0<20,22050,0.1>fc arriba
+slider2:0<20,22050,0.1>fc abajo
+
+@init
+e=exp(1);
+pi=2*asin(1);
+bpos=0;
+
+@slider
+function coeflp(fcin)(
+  e^(-2*pi*fcin/srate);
+);
+aup = coeflp(slider1);
+adown = coeflp(slider2);
+
+@block
+blah+=samplesblock;
+
+@sample
+in=(spl0+spl1)*0.5;
+in>out ? (
+a=aup;
+):(
+a=adown;);
+
+out=(1-a)*in+a*out;
+
+spl0=out;
+spl1=out;

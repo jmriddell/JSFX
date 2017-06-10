@@ -1,0 +1,16 @@
+desc:Split B
+
+@init
+bpos=0;
+
+@block
+blah+=samplesblock;
+
+@sample
+L=spl0;
+R=spl1;
+spl0=spl2;
+spl1=spl3;
+spl2=L;
+spl3=R;
+
