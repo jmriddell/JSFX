@@ -1,15 +1,10 @@
-desc:Prueba asdf
+desc:Gfx Draw Test (jmriddell)
 
-slider1:0<0,100,5>de a 5
-slider2:0<0,100,0.1>fino
-slider3:0<1,4,1{uno,dos,tres,cuatro}>alternativas
+options:no_meter
 
 @init
 gfx_clear=-1;
-
-@sample
-spl0=atan(spl0);
-spl1=atan(spl1);
+gfx_mode=1;
 
 @gfx
 function setcol(r g b a)
@@ -20,6 +15,6 @@ function setpos(x y)
 (
   gfx_x=x; gfx_y=y;
 );
-setcol(1,0.5,0.25,1);
+setcol(1,0.5,0.25,0.5);
 aa=1;
   gfx_lineto(mouse_x,mouse_y,aa);

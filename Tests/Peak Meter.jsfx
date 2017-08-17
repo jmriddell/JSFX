@@ -1,0 +1,94 @@
+desc:Peak Meter (juan)
+options:no_meter
+
+@init
+ext_noinit=1;
+gfx_clear= -1;
+barwidth=14;
+margins=30;
+function setcol(r g b a)
+(
+  gfx_r=r; gfx_g=g; gfx_b=b; gfx_a=a;
+);
+function setpos(x y)
+(
+  gfx_x=x; gfx_y=y;
+);
+function gfxreset()
+(
+  w=gfx_w;
+  h=gfx_h;
+  barpos=0;
+  drawingH=gfx_h-2*margins;
+  drawingW=gfx_w-2*margins;
+  setpos(0,0);
+  setcol(0,0,0,1);
+  gfx_rectto(gfx_w,gfx_h);
+);
+function drawpos(x)
+(
+  floor(margins + x*drawingW);
+);
+function drawbar(x)
+(
+  setpos(drawpos(barpos),margins);
+  x>=barpos ? (
+    setcol(1,1,0.25,1);
+  ) : (
+    setcol(0,0,0,1);
+  );
+  gfx_rectto(drawpos(x),margins+barwidth);
+  barpos=x;
+);
+function monograd(x,base)
+(
+  min(max(x+base-1,0),1);
+);
+function gradient(x) local(r g b)
+(
+  /*x<=1 ? (
+    setcol(
+      2*monograd(x,0.8),
+      2*monograd(x,0.5),
+      3*monograd(x,0.125)+(min(x*2,0.25)),
+      1
+    );
+  ) : (
+    setcol(1,0,0,1);
+  );*/
+  r=x;
+  g=r*0.8*x^2;
+  b=g*0.8*x^2+0.1;
+    setcol(r,g,b,1);
+);
+function burnrect(x)
+(
+  gradient(x);
+  setpos(margins,margins+barwidth*3);
+  gfx_rectto(gfx_x+barwidth,gfx_y+barwidth);
+);
+function drawgradient(factor) local(i,starth,endh)
+(
+  i=0;
+  starth=margins+barwidth;
+  endh=starth+barwidth;
+  loop(drawingW,
+    gradient(factor*i/drawingW);
+    setpos(i+margins,starth);
+    gfx_lineto(gfx_x,endh);
+    i+=1;
+  );
+);
+gfxreset();
+@sample
+maxim = max(maxim,max(abs(spl0),abs(spl1))); 
+
+@gfx 
+gfx_h != h || gfx_w != w ? (
+  gfxreset();
+);
+  
+drawgradient(1);
+drawbar(maxim);
+burnrect(maxim*1);
+maxim=0; 
