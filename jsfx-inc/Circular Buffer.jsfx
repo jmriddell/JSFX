@@ -1,6 +1,6 @@
 desc:Circular Buffer
 
-import ../Memory Manager
+import ../Memory Manager.jsfx
 
 @init
 function cbPush(value) instance(current)

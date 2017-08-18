@@ -3,23 +3,22 @@ desc:Impulse Generator
 slider1:0<1,44100,1>Period (samples)
 slider2:0<0,1,0.001>Amplitude
 
+
+
 @init
-bpos=0;
 i=0;
 
-@slider
 
-@block
-blah+=samplesblock;
+
 
 @sample
 i>=slider1 ? (
-spl0=slider2;
-spl1=slider2;
-i=0;
+  spl0=slider2;
+  spl1=slider2;
+  i=0;
 ) : (
-spl0=0;
-spl1=0;
-i=i+1;
+  spl0=0;
+  spl1=0;
+  i=i+1;
 )
 

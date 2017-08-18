@@ -1,8 +1,8 @@
 desc:Delay Import
 
 //import ../Memory Manager
-import ../Delay n samples
-import ../fistOrderLPF
+import ../Delay Integer.jsfx
+import ../fistOrderLPF.jsfx
 
 slider1:0<0,44100,2>Delay (samples)
 

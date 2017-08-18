@@ -1,4 +1,4 @@
-desc:new effect
+desc:First Order LPF
 
 @init
   e=exp(1);

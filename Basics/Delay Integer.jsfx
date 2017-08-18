@@ -1,6 +1,6 @@
 desc:Delay Uninterpolated
 
-import Circular Buffer
+import ../Circular Buffer.jsfx
 
 @init
 
