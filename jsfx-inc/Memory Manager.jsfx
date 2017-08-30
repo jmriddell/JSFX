@@ -1,4 +1,5 @@
 desc:Memory Manager
+//If you include this file please do NOT use mem as namepace.
 
 //The first allocated object in ram is for the manager
 //itself, there are stored the size and the beginning
@@ -13,6 +14,13 @@ desc:Memory Manager
 @init
 
 function memMgrSetup(basesize auxmem)
+/*
+  Parameters:
+    basesize: The initial amount of objects to leave room for in
+      the index allocated as the first object.
+    auxmem: The ammount of memory slots to leave at the end of the
+      used allocated memory to be used as extra auxiliary memory.
+*/
 (
   mem.aux = auxmem;
   basesize += 1;

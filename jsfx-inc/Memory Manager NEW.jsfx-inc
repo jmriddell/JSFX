@@ -1,0 +1,45 @@
+desc:Memory Manager
+/*
+Data and objects in memory by behavior:
+(#.Category)
+([letter]-Condition. Implicances)
+  1.Initialization:
+    A-It is declared in the beginning.
+    B-It is declared on the run.
+  2.Persistency:
+    A-It is needed for several operations.
+    B-It is needed for just one operation.
+  3.Deletion:
+    A-Lasts forever.
+    B-Could be deleted.
+      a-Will be deleted.
+  4.Ammount of data:
+    A-There is a fixed known ammount of data to be stored.
+    B-The ammount of data to be stored is unknown while storing until finished.
+
+Groups of objects:
+
+
+
+Objects to store:
+  Type A:
+    Description:
+      There is certainty that they will be used and never need be deleted
+      enlarged or srinked.
+  Type B: 
+    Description:
+      They are not intended to exist forever and it is not certain
+      that they will be needed to be deleted.
+  Type C:
+    Description:
+      They are known to be deleted or exist just for a short time but there
+      could be other operations while this object exists.
+  Auxiliary Memory:
+    Description:
+      There is no certainty of how many data will be needed to store.
+      A space where data can be stored and used within ONE operation,
+      once used must NOT be leaved there to read later, so it can be
+      safely overwritten or deleted.
+      Anyway the data written here can be reclaimed to be marked as an
+      object to prevent being overwritten/deleted.      
+*/

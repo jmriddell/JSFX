@@ -6,7 +6,6 @@ slider2:0<20,22050,0.1>fc abajo
 @init
 e=exp(1);
 pi=2*asin(1);
-bpos=0;
 
 @slider
 function coeflp(fcin)(
@@ -14,9 +13,6 @@ function coeflp(fcin)(
 );
 aup = coeflp(slider1);
 adown = coeflp(slider2);
-
-@block
-blah+=samplesblock;
 
 @sample
 in=(spl0+spl1)*0.5;
