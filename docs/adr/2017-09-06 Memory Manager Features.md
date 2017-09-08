@@ -27,6 +27,9 @@ The first level on the list are categories of cases. The second level are the ca
 * Ammount of data:
     * A: There is a fixed known ammount of data to be stored.
     * A<sup>c</sup>: The ammount of data to be stored is unknown while storing until finished.
+* Resize:
+	* R: The ammount of data changes over time.
+	* R<sup>c</sup>: The ammount of data is static.
 
 I⊆A
 
